@@ -87,7 +87,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.greetingContainer}>
               <Text style={styles.greetingHi}>Hi,</Text>
-              <Text style={styles.greetingName}>{userData.name}</Text>
+              <Text style={styles.greetingName}>ojan alimnudin</Text>
             </View>
           </View>
         </View>

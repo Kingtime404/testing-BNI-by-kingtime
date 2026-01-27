@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { 
   ArrowRightLeft, 
   BarChart3, 
-  Banknote, 
+  CreditCard, 
   Umbrella, 
   MoreHorizontal,
   Lightbulb,
@@ -31,7 +31,7 @@ const menuItems: MenuItem[] = [
   { id: '4', name: 'Pulsa', icon: <Smartphone size={22} color="#fff" />, color: '#A855F7', route: '/topup' },
   { id: '5', name: 'Internet', icon: <Globe size={22} color="#fff" />, color: '#F472B6', route: '/(tabs)/bills' },
   { id: '6', name: 'Investasi', icon: <BarChart3 size={22} color="#fff" />, color: '#60A5FA', route: '/investment' },
-  { id: '7', name: 'Kredit', icon: <Banknote size={22} color="#fff" />, color: '#F87171', route: '/credit' },
+  { id: '7', name: 'Kredit', icon: <CreditCard size={22} color="#fff" />, color: '#F87171', route: '/credit' },
   { id: '8', name: 'Asuransi', icon: <Umbrella size={22} color="#fff" />, color: '#4ADE80', route: '/insurance' },
   { id: '9', name: 'Lainnya', icon: <MoreHorizontal size={22} color="#fff" />, color: '#9CA3AF', route: '/services' },
 ];

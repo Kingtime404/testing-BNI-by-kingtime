@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   creditCard: {
-    backgroundColor: Colors.menu.red,
+    backgroundColor: '#1a1a1a',
     borderRadius: 20,
     padding: 24,
     overflow: 'hidden',
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 75,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(192,192,192,0.15)',
   },
   cardDecor2: {
     position: 'absolute',
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     width: 180,
     height: 180,
     borderRadius: 90,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: 'rgba(169,169,169,0.12)',
   },
   usageCard: {
     backgroundColor: Colors.white,

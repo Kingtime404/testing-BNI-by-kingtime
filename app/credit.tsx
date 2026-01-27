@@ -23,7 +23,7 @@ const creditProducts: CreditProduct[] = [
 
 const activeCreditCard = {
   name: 'BNI Emerald Card',
-  number: '4111 **** **** 1234',
+  number: '1651 9569 69** ****',
   limit: 300500000,
   used: 50500000,
   dueDate: '2026-01-28',

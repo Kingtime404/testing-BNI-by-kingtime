@@ -22,7 +22,7 @@ const creditProducts: CreditProduct[] = [
 ];
 
 const activeCreditCard = {
-  name: 'BNI Platinum Card',
+  name: 'BNI Emerald Card',
   number: '4111 **** **** 1234',
   limit: 50000000,
   used: 12500000,
@@ -47,7 +47,7 @@ export default function CreditScreen() {
         <View style={styles.creditCard}>
           <View style={styles.cardHeader}>
             <CreditCard size={28} color="#fff" />
-            <Text style={styles.cardType}>PLATINUM</Text>
+            <Text style={styles.cardType}>EMERALD</Text>
           </View>
           <Text style={styles.cardNumber}>{activeCreditCard.number}</Text>
           <Text style={styles.cardName}>{activeCreditCard.name}</Text>

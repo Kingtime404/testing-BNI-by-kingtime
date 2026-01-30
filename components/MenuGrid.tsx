@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { 
-  ArrowRightLeft, 
+  Repeat, 
   BarChart3, 
   CreditCard, 
   Umbrella, 
@@ -25,7 +25,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  { id: '1', name: 'Transfer', icon: <ArrowRightLeft size={22} color="#fff" />, color: '#22C55E', route: '/(tabs)/transfer' },
+  { id: '1', name: 'Transfer', icon: <Repeat size={22} color="#fff" strokeWidth={2.5} />, color: '#22C55E', route: '/(tabs)/transfer' },
   { id: '2', name: 'Listrik', icon: <Lightbulb size={22} color="#fff" />, color: '#FBBF24', route: '/(tabs)/bills' },
   { id: '3', name: 'Air PDAM', icon: <Droplet size={22} color="#fff" />, color: '#38BDF8', route: '/(tabs)/bills' },
   { id: '4', name: 'Pulsa', icon: <Smartphone size={22} color="#fff" />, color: '#A855F7', route: '/topup' },

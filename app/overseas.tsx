@@ -48,7 +48,7 @@ export default function OverseasScreen() {
       if (savedBalance) {
         setCurrentBalance(parseInt(savedBalance, 10));
       }
-      const savedName = await AsyncStorage.getItem('accountName');
+      const savedName = await AsyncStorage.getItem('userName');
       if (savedName) {
         setCurrentName(savedName);
       }
@@ -101,7 +101,7 @@ export default function OverseasScreen() {
   const saveName = async () => {
     if (tempName.trim().length > 0) {
       try {
-        await AsyncStorage.setItem('accountName', tempName.trim());
+        await AsyncStorage.setItem('userName', tempName.trim());
         setCurrentName(tempName.trim());
         Alert.alert('Berhasil', 'Nama account berhasil diubah');
       } catch (error) {

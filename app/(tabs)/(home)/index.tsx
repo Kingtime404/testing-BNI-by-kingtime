@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, Modal, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ChevronRight, Gift, Percent, Lightbulb, ArrowLeftRight, TrendingUp, Award, LogOut, User, Bell, FileText, X, Check } from 'lucide-react-native';
+import { ChevronRight, Gift, Percent, Lightbulb, ArrowLeftRight, TrendingUp, Award, LogOut, User, Bell, FileText } from 'lucide-react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
 import Colors from '@/constants/colors';
 import BalanceCard from '@/components/BalanceCard';
@@ -20,8 +20,7 @@ export default function HomeScreen() {
   const [activeTab, setActiveTab] = useState<TabType>('insight');
   const [userName, setUserName] = useState<string>('Ozan');
   const [cardBalance, setCardBalance] = useState<number>(userData.totalBalance);
-  const [editModalVisible, setEditModalVisible] = useState<boolean>(false);
-  const [tempName, setTempName] = useState<string>('');
+  
   const recentTransactions = transactions.slice(0, 4);
   const userPoints = 12500;
 
@@ -63,22 +62,7 @@ export default function HomeScreen() {
     }, [])
   );
 
-  const openEditModal = () => {
-    setTempName(userName);
-    setEditModalVisible(true);
-  };
-
-  const saveUserName = async () => {
-    if (tempName.trim()) {
-      try {
-        await AsyncStorage.setItem('userName', tempName.trim());
-        setUserName(tempName.trim());
-      } catch (error) {
-        console.log('Error saving user name:', error);
-      }
-    }
-    setEditModalVisible(false);
-  };
+  
 
   return (
     <View style={styles.container}>
@@ -131,7 +115,7 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.header}>
-          <TouchableOpacity style={styles.userSection} onPress={openEditModal} activeOpacity={0.7}>
+          <View style={styles.userSection}>
             <View style={styles.avatarContainer}>
               <View style={styles.avatarInner}>
                 <User size={22} color="#6B7280" strokeWidth={2} />
@@ -141,43 +125,8 @@ export default function HomeScreen() {
               <Text style={styles.greetingHi}>Hi,</Text>
               <Text style={styles.greetingName}>{userName}</Text>
             </View>
-          </TouchableOpacity>
+          </View>
         </View>
-
-        <Modal
-          visible={editModalVisible}
-          transparent
-          animationType="fade"
-          onRequestClose={() => setEditModalVisible(false)}
-        >
-          <TouchableWithoutFeedback onPress={() => setEditModalVisible(false)}>
-            <View style={styles.modalOverlay}>
-              <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={styles.modalContent}>
-                  <View style={styles.modalHeader}>
-                    <Text style={styles.modalTitle}>Ubah Nama</Text>
-                    <TouchableOpacity onPress={() => setEditModalVisible(false)} style={styles.modalCloseBtn}>
-                      <X size={20} color={Colors.gray[500]} />
-                    </TouchableOpacity>
-                  </View>
-                  <TextInput
-                    style={styles.nameInput}
-                    value={tempName}
-                    onChangeText={setTempName}
-                    placeholder="Masukkan nama"
-                    placeholderTextColor={Colors.gray[400]}
-                    autoFocus
-                    maxLength={30}
-                  />
-                  <TouchableOpacity style={styles.saveButton} onPress={saveUserName}>
-                    <Check size={18} color="#fff" />
-                    <Text style={styles.saveButtonText}>Simpan</Text>
-                  </TouchableOpacity>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
 
         <View style={styles.tabContainer}>
           <TouchableOpacity 
@@ -385,75 +334,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 24,
-  },
-  modalContent: {
-    backgroundColor: Colors.white,
-    borderRadius: 20,
-    padding: 24,
-    width: '100%',
-    maxWidth: 340,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.15,
-    shadowRadius: 24,
-    elevation: 8,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: Colors.black,
-  },
-  modalCloseBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: Colors.gray[100],
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  nameInput: {
-    backgroundColor: Colors.gray[50],
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    fontSize: 16,
-    color: Colors.black,
-    borderWidth: 1,
-    borderColor: Colors.gray[200],
-    marginBottom: 20,
-  },
-  saveButton: {
-    backgroundColor: '#F26522',
-    borderRadius: 12,
-    paddingVertical: 14,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-  },
-  saveButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  userName: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: Colors.black,
-    marginTop: 2,
-  },
+  
   tabContainer: {
     flexDirection: 'row',
     marginHorizontal: 16,

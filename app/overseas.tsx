@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, Keyboard, TouchableWithoutFeedback, Alert, Platform } from 'react-native';
-import { User, Wallet, ChevronRight, X, Check, Globe } from 'lucide-react-native';
+import { Wallet, ChevronRight, X, Check, Globe } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
@@ -21,22 +21,12 @@ const menuItems: MenuItem[] = [
     icon: <Wallet size={24} color="#fff" />, 
     color: '#22C55E' 
   },
-  { 
-    id: '2', 
-    name: 'Transfer Data', 
-    description: 'Ubah nama account pada menu account',
-    icon: <User size={24} color="#fff" />, 
-    color: '#3B82F6' 
-  },
 ];
 
 export default function OverseasScreen() {
   const [balanceModalVisible, setBalanceModalVisible] = useState(false);
-  const [nameModalVisible, setNameModalVisible] = useState(false);
   const [tempBalance, setTempBalance] = useState('');
-  const [tempName, setTempName] = useState('');
   const [currentBalance, setCurrentBalance] = useState(0);
-  const [currentName, setCurrentName] = useState('Ozan');
 
   useEffect(() => {
     loadData();
@@ -45,12 +35,8 @@ export default function OverseasScreen() {
   const loadData = async () => {
     try {
       const savedBalance = await AsyncStorage.getItem('cardBalance');
-      const savedName = await AsyncStorage.getItem('userName');
       if (savedBalance) {
         setCurrentBalance(parseInt(savedBalance, 10));
-      }
-      if (savedName) {
-        setCurrentName(savedName);
       }
     } catch (error) {
       console.log('Error loading data:', error);
@@ -65,9 +51,6 @@ export default function OverseasScreen() {
     if (item.id === '1') {
       setTempBalance(currentBalance.toString());
       setBalanceModalVisible(true);
-    } else if (item.id === '2') {
-      setTempName(currentName);
-      setNameModalVisible(true);
     }
   };
 
@@ -86,22 +69,6 @@ export default function OverseasScreen() {
       Alert.alert('Error', 'Masukkan nominal yang valid');
     }
     setBalanceModalVisible(false);
-  };
-
-  const saveName = async () => {
-    if (tempName.trim()) {
-      try {
-        await AsyncStorage.setItem('userName', tempName.trim());
-        setCurrentName(tempName.trim());
-        Alert.alert('Berhasil', 'Nama account berhasil diubah');
-      } catch (error) {
-        console.log('Error saving name:', error);
-        Alert.alert('Error', 'Gagal menyimpan nama');
-      }
-    } else {
-      Alert.alert('Error', 'Nama tidak boleh kosong');
-    }
-    setNameModalVisible(false);
   };
 
   const formatCurrency = (value: string) => {
@@ -178,42 +145,6 @@ export default function OverseasScreen() {
                   />
                 </View>
                 <TouchableOpacity style={styles.saveButton} onPress={saveBalance}>
-                  <Check size={18} color="#fff" />
-                  <Text style={styles.saveButtonText}>Simpan</Text>
-                </TouchableOpacity>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-
-      <Modal
-        visible={nameModalVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setNameModalVisible(false)}
-      >
-        <TouchableWithoutFeedback onPress={() => setNameModalVisible(false)}>
-          <View style={styles.modalOverlay}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <View style={styles.modalContent}>
-                <View style={styles.modalHeader}>
-                  <Text style={styles.modalTitle}>Transfer Data</Text>
-                  <TouchableOpacity onPress={() => setNameModalVisible(false)} style={styles.modalCloseBtn}>
-                    <X size={20} color={Colors.gray[500]} />
-                  </TouchableOpacity>
-                </View>
-                <Text style={styles.inputLabel}>Masukkan Nama Account Baru</Text>
-                <TextInput
-                  style={styles.nameInput}
-                  value={tempName}
-                  onChangeText={setTempName}
-                  placeholder="Masukkan nama"
-                  placeholderTextColor={Colors.gray[400]}
-                  autoFocus
-                  maxLength={30}
-                />
-                <TouchableOpacity style={styles.saveButton} onPress={saveName}>
                   <Check size={18} color="#fff" />
                   <Text style={styles.saveButtonText}>Simpan</Text>
                 </TouchableOpacity>
@@ -369,17 +300,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: Colors.black,
-  },
-  nameInput: {
-    backgroundColor: Colors.gray[50],
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    fontSize: 16,
-    color: Colors.black,
-    borderWidth: 1,
-    borderColor: Colors.gray[200],
-    marginBottom: 20,
   },
   saveButton: {
     backgroundColor: '#6366F1',

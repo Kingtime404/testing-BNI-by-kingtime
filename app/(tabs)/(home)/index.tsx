@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, Modal, TextInput, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ChevronRight, Gift, Percent, Lightbulb, ArrowLeftRight, TrendingUp, Award, LogOut, User, Bell, FileText, Pencil, X, Check } from 'lucide-react-native';
+import { ChevronRight, Gift, Percent, Lightbulb, ArrowLeftRight, TrendingUp, Award, LogOut, User, Bell, FileText, X, Check } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import Colors from '@/constants/colors';
 import BalanceCard from '@/components/BalanceCard';
@@ -114,10 +114,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.greetingContainer}>
               <Text style={styles.greetingHi}>Hi,</Text>
-              <View style={styles.nameRow}>
-                <Text style={styles.greetingName}>{userName}</Text>
-                <Pencil size={14} color={Colors.gray[400]} style={styles.editIcon} />
-              </View>
+              <Text style={styles.greetingName}>{userName}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -362,14 +359,7 @@ const styles = StyleSheet.create({
     color: Colors.black,
     marginTop: 2,
   },
-  nameRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  editIcon: {
-    marginTop: 2,
-  },
+
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

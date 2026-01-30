@@ -18,7 +18,7 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>('insight');
-  const [userName, setUserName] = useState<string>('Wahyu');
+  const [userName, setUserName] = useState<string>('Ozan');
   const [editModalVisible, setEditModalVisible] = useState<boolean>(false);
   const [tempName, setTempName] = useState<string>('');
   const recentTransactions = transactions.slice(0, 4);

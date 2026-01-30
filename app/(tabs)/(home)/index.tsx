@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar, Modal,
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChevronRight, Gift, Percent, Lightbulb, ArrowLeftRight, TrendingUp, Award, LogOut, User, Bell, FileText, X, Check } from 'lucide-react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import Colors from '@/constants/colors';
 import BalanceCard from '@/components/BalanceCard';
 import PortfolioCard from '@/components/PortfolioCard';
@@ -19,24 +19,49 @@ export default function HomeScreen() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>('insight');
   const [userName, setUserName] = useState<string>('Ozan');
+  const [cardBalance, setCardBalance] = useState<number>(userData.totalBalance);
   const [editModalVisible, setEditModalVisible] = useState<boolean>(false);
   const [tempName, setTempName] = useState<string>('');
   const recentTransactions = transactions.slice(0, 4);
   const userPoints = 12500;
 
   useEffect(() => {
-    const loadUserName = async () => {
+    const loadUserData = async () => {
       try {
         const savedName = await AsyncStorage.getItem('userName');
+        const savedBalance = await AsyncStorage.getItem('cardBalance');
         if (savedName) {
           setUserName(savedName);
         }
+        if (savedBalance) {
+          setCardBalance(parseInt(savedBalance, 10));
+        }
       } catch (error) {
-        console.log('Error loading user name:', error);
+        console.log('Error loading user data:', error);
       }
     };
-    loadUserName();
+    loadUserData();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const refreshData = async () => {
+        try {
+          const savedName = await AsyncStorage.getItem('userName');
+          const savedBalance = await AsyncStorage.getItem('cardBalance');
+          if (savedName) {
+            setUserName(savedName);
+          }
+          if (savedBalance) {
+            setCardBalance(parseInt(savedBalance, 10));
+          }
+        } catch (error) {
+          console.log('Error refreshing data:', error);
+        }
+      };
+      refreshData();
+    }, [])
+  );
 
   const openEditModal = () => {
     setTempName(userName);
@@ -197,7 +222,7 @@ export default function HomeScreen() {
           <BalanceCard
             accountName="Rekening Utama"
             accountNumber="0812345678"
-            balance={userData.totalBalance}
+            balance={cardBalance}
           />
           <View style={{ width: 16 }} />
         </ScrollView>

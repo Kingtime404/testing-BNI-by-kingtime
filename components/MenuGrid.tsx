@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { 
   ArrowRightLeft, 
@@ -10,11 +10,11 @@ import {
   Lightbulb,
   Droplet,
   Smartphone,
-  Globe
+  Globe,
+  Wifi
 } from 'lucide-react-native';
 import Colors from '@/constants/colors';
 import * as Haptics from 'expo-haptics';
-import { Platform } from 'react-native';
 
 interface MenuItem {
   id: string;
@@ -29,11 +29,12 @@ const menuItems: MenuItem[] = [
   { id: '2', name: 'Listrik', icon: <Lightbulb size={22} color="#fff" />, color: '#FBBF24', route: '/(tabs)/bills' },
   { id: '3', name: 'Air PDAM', icon: <Droplet size={22} color="#fff" />, color: '#38BDF8', route: '/(tabs)/bills' },
   { id: '4', name: 'Pulsa', icon: <Smartphone size={22} color="#fff" />, color: '#A855F7', route: '/topup' },
-  { id: '5', name: 'Internet', icon: <Globe size={22} color="#fff" />, color: '#F472B6', route: '/(tabs)/bills' },
+  { id: '5', name: 'Internet', icon: <Wifi size={22} color="#fff" />, color: '#F472B6', route: '/(tabs)/bills' },
   { id: '6', name: 'Investasi', icon: <BarChart3 size={22} color="#fff" />, color: '#60A5FA', route: '/investment' },
   { id: '7', name: 'Kredit', icon: <CreditCard size={22} color="#fff" />, color: '#F87171', route: '/credit' },
   { id: '8', name: 'Asuransi', icon: <Umbrella size={22} color="#fff" />, color: '#4ADE80', route: '/insurance' },
-  { id: '9', name: 'Lainnya', icon: <MoreHorizontal size={22} color="#fff" />, color: '#9CA3AF', route: '/services' },
+  { id: '9', name: 'Luar Negeri', icon: <Globe size={22} color="#fff" />, color: '#6366F1', route: '/overseas' },
+  { id: '10', name: 'Lainnya', icon: <MoreHorizontal size={22} color="#fff" />, color: '#9CA3AF', route: '/services' },
 ];
 
 export default function MenuGrid() {

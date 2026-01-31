@@ -36,7 +36,7 @@ export default function OverseasScreen() {
   const [tempBalance, setTempBalance] = useState('');
   const [tempName, setTempName] = useState('');
   const [currentBalance, setCurrentBalance] = useState(0);
-  const [currentName, setCurrentName] = useState('Ozan');
+  const [currentName, setCurrentName] = useState('Wahyu');
 
   useEffect(() => {
     loadData();
